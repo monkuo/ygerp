@@ -18,18 +18,17 @@ import org.springside.modules.security.utils.Digests;
 import org.springside.modules.utils.Clock;
 import org.springside.modules.utils.Encodes;
 
-import com.okbong.yg.dao.TaskDao;
-import com.okbong.yg.dao.UserDao;
 import com.okbong.yg.entity.User;
-import com.okbong.yg.service.ServiceException;
+import com.okbong.yg.exception.ServiceException;
+import com.okbong.yg.repository.UserDao;
 import com.okbong.yg.service.account.ShiroDbRealm.ShiroUser;
 
 /**
- * 用户管理类.
+ * 用戶管理類.
  * 
  * @author calvin
  */
-// Spring Service Bean的标识.
+// Spring Service Bean的標識.
 @Component
 @Transactional
 public class AccountService {
@@ -39,9 +38,8 @@ public class AccountService {
 	private static final int SALT_SIZE = 8;
 
 	private static Logger logger = LoggerFactory.getLogger(AccountService.class);
-
+	@Autowired
 	private UserDao userDao;
-	private TaskDao taskDao;
 	private Clock clock = Clock.DEFAULT;
 
 	public List<User> getAllUser() {
@@ -73,23 +71,21 @@ public class AccountService {
 
 	public void deleteUser(Long id) {
 		if (isSupervisor(id)) {
-			logger.warn("操作员{}尝试删除超级管理员用户", getCurrentUserName());
-			throw new ServiceException("不能删除超级管理员用户");
+			logger.warn("操作員{}嘗試刪除超級管理員用戶", getCurrentUserName());
+			throw new ServiceException("不能刪除超級管理員用戶");
 		}
 		userDao.delete(id);
-		taskDao.deleteByUserId(id);
-
 	}
 
 	/**
-	 * 判断是否超级管理员.
+	 * 判斷是否超級管理員.
 	 */
 	private boolean isSupervisor(Long id) {
 		return id == 1;
 	}
 
 	/**
-	 * 取出Shiro中的当前用户LoginName.
+	 * 取出Shiro中的當前用戶LoginName.
 	 */
 	private String getCurrentUserName() {
 		ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
@@ -97,7 +93,7 @@ public class AccountService {
 	}
 
 	/**
-	 * 设定安全的密码，生成随机的salt并经过1024次 sha-1 hash
+	 * 設定安全的密碼，生成隨機的salt並經過1024次 sha-1 hash
 	 */
 	private void entryptPassword(User user) {
 		byte[] salt = Digests.generateSalt(SALT_SIZE);
@@ -105,16 +101,6 @@ public class AccountService {
 
 		byte[] hashPassword = Digests.sha1(user.getPlainPassword().getBytes(), salt, HASH_INTERATIONS);
 		user.setPassword(Encodes.encodeHex(hashPassword));
-	}
-
-	@Autowired
-	public void setUserDao(UserDao userDao) {
-		this.userDao = userDao;
-	}
-
-	@Autowired
-	public void setTaskDao(TaskDao taskDao) {
-		this.taskDao = taskDao;
 	}
 
 	public void setClock(Clock clock) {

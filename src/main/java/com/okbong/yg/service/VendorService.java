@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2005, 2014 springside.github.io
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Copyright (c)  2014 O.K Bong
+ * Author : Benson Kuo
  *******************************************************************************/
 package com.okbong.yg.service;
 
@@ -20,43 +19,43 @@ import org.springside.modules.persistence.DynamicSpecifications;
 import org.springside.modules.persistence.SearchFilter;
 import org.springside.modules.persistence.SearchFilter.Operator;
 
-import com.okbong.yg.dao.TaskDao;
-import com.okbong.yg.entity.Task;
+import com.okbong.yg.entity.Vendor;
+import com.okbong.yg.repository.VendorDao;
 
-// Spring Bean的标识.
+// Spring Bean的標識.
 @Component
-// 类中所有public函数都纳入事务管理的标识.
+// 類中所有public函數都納入事務管理的標識.
 @Transactional
-public class TaskService {
+public class VendorService {
 
-	private TaskDao taskDao;
+	private VendorDao taskDao;
 
-	public Task getTask(Long id) {
+	public Vendor getVendor(Long id) {
 		return taskDao.findOne(id);
 	}
 
-	public void saveTask(Task entity) {
+	public void saveVendor(Vendor entity) {
 		taskDao.save(entity);
 	}
 
-	public void deleteTask(Long id) {
+	public void deleteVendor(Long id) {
 		taskDao.delete(id);
 	}
 
-	public List<Task> getAllTask() {
-		return (List<Task>) taskDao.findAll();
+	public List<Vendor> getAllVendor() {
+		return (List<Vendor>) taskDao.findAll();
 	}
 
-	public Page<Task> getUserTask(Long userId, Map<String, Object> searchParams, int pageNumber, int pageSize,
+	public Page<Vendor> getUserVendor(Long userId, Map<String, Object> searchParams, int pageNumber, int pageSize,
 			String sortType) {
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
-		Specification<Task> spec = buildSpecification(userId, searchParams);
+		Specification<Vendor> spec = buildSpecification(userId, searchParams);
 
 		return taskDao.findAll(spec, pageRequest);
 	}
 
 	/**
-	 * 创建分页请求.
+	 * 創建分頁請求.
 	 */
 	private PageRequest buildPageRequest(int pageNumber, int pagzSize, String sortType) {
 		Sort sort = null;
@@ -70,17 +69,17 @@ public class TaskService {
 	}
 
 	/**
-	 * 创建动态查询条件组合.
+	 * 創建動態查詢準則組合.
 	 */
-	private Specification<Task> buildSpecification(Long userId, Map<String, Object> searchParams) {
+	private Specification<Vendor> buildSpecification(Long userId, Map<String, Object> searchParams) {
 		Map<String, SearchFilter> filters = SearchFilter.parse(searchParams);
 		filters.put("user.id", new SearchFilter("user.id", Operator.EQ, userId));
-		Specification<Task> spec = DynamicSpecifications.bySearchFilter(filters.values(), Task.class);
+		Specification<Vendor> spec = DynamicSpecifications.bySearchFilter(filters.values(), Vendor.class);
 		return spec;
 	}
 
 	@Autowired
-	public void setTaskDao(TaskDao taskDao) {
+	public void setVendorDao(VendorDao taskDao) {
 		this.taskDao = taskDao;
 	}
 }

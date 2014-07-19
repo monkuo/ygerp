@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.ImmutableList;
 
 @Entity
-@Table(name = "ss_user")
+@Table(name = "yg_user")
 public class User extends IdEntity {
 	private String loginName;
 	private String name;
@@ -56,7 +56,7 @@ public class User extends IdEntity {
 		this.name = name;
 	}
 
-	// 不持久化到数据库，也不显示在Restful接口的属性.
+	// 不持久化到資料庫，也不顯示在Restful介面的屬性.
 	@Transient
 	@JsonIgnore
 	public String getPlainPassword() {
@@ -94,11 +94,11 @@ public class User extends IdEntity {
 	@Transient
 	@JsonIgnore
 	public List<String> getRoleList() {
-		// 角色列表在数据库中实际以逗号分隔字符串存储，因此返回不能修改的List.
+		// 角色清單在資料庫中實際以逗號分隔字串存儲，因此返回不能修改的List.
 		return ImmutableList.copyOf(StringUtils.split(roles, ","));
 	}
 
-	// 设定JSON序列化时的日期格式
+	// 設定JSON序列化時的日期格式
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+08:00")
 	public Date getRegisterDate() {
 		return registerDate;

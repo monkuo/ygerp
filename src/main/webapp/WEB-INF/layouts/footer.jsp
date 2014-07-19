@@ -1,7 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!-- Page-Level Demo Scripts - Blank - Use for reference -->
 <script>
 	var nowTemp = new Date();
     var nowMonth = nowTemp.getMonth()+1;
