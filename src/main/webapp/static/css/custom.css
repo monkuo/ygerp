@@ -13,7 +13,7 @@
     GENERAL  STYLES    
     =============================================*/
 body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: "微軟正黑體", "Microsoft JhengHei", "新細明體", "PMingLiU",'Play', sans-serif;
 }
 
  #wrapper {
@@ -32,7 +32,7 @@ body {
     margin:10px 20px 10px 0px;
     background-color:#fff!important;
     padding:10px;
-    min-height:1200px;
+    /* min-height: 1200px;*/
 }
 
 .text-center {
@@ -357,9 +357,9 @@ line-height: 1.428571429;
  
  @media(min-width:768px) {
      #page-wrapper{
-               margin: 0 0 0 260px;
-        padding: 15px 30px;
-        min-height: 1200px;
+        margin: 0 0 0 260px;
+        padding: 10px 20px;
+       /* min-height: 1200px;*/
 		
     }
 	
@@ -377,3 +377,31 @@ line-height: 1.428571429;
 }
 
 
+.copyrights{
+	float: left;
+    width: 100%;
+    clear: both;
+	color: #fff;
+	background-color: #313131;
+}
+#copyright-note{
+	width: 960px;
+	margin: 0 auto;
+	clear: both;
+	max-width: 96%;
+	padding-top: 10px;
+	padding-bottom: 7px;
+}
+.top {
+float: right;
+}
+.top .toplink{
+background: url(images/top_arrow.png) no-repeat center center;
+height: 3px;
+display: block;
+background-color: #1c8b78;
+color: #fff!important;
+}
+.navbar-brand {
+	padding: 20px 15px;
+}

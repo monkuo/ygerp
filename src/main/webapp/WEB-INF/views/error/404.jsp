@@ -6,11 +6,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>404 - 页面不存在</title>
+    <title>404 - 頁面不存在</title>
 </head>
 
 <body>
-	<h2>404 - 页面不存在.</h2>
-	<p><a href="<c:url value="/"/>">返回首页</a></p>
+    <h2>404 - 頁面不存在.</h2>
+    <p><a href="<c:url value="/"/>">返回首頁</a></p>
 </body>
 </html>

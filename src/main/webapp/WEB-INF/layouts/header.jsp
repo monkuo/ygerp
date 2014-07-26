@@ -6,9 +6,12 @@
 	<div class="navbar-header">
         <a class="navbar-brand" href="<c:url value="/"/>">源 吉 科 技</a> 
     </div>
+    <shiro:user>
 	<div style="color: white; padding: 15px 50px 5px 50px; float: right; font-size: 16px;">
-		Last access : 30 May 2014 &nbsp; <a href="<c:url value="/logout"/>" class="btn btn-danger square-btn-adjust">Logout</a>
+	   <shiro:principal property="name"/>
+		上次登入 : 2014-07-20 &nbsp; <a href="<c:url value="/logout"/>" class="btn btn-danger">登出</a>
 	</div>
+	</shiro:user>
 </nav>
 <!-- /. NAV TOP  -->
 <nav class="navbar-default navbar-side" role="navigation">
@@ -16,11 +19,11 @@
 	<shiro:user>
 		<ul class="nav" id="main-menu">
 			<li class="text-center"><img src="<c:url value="/static/img/find_user.png"/>" class="user-image img-responsive" /></li>
-            <li><a href="<c:url value="/"/>"><i class="fa fa-dashboard fa-3x"></i>Dashboard</a></li>
-			<li><a href="#"><i class="fa fa-desktop fa-3x"></i>出貨管理<span class="fa arrow"></span></a>
+            <li><a href="<c:url value="/"/>"><i class="fa fa-desktop fa-3x"></i>Dashboard</a></li>
+			<li><a href="#"><i class="fa fa-dashboard fa-3x"></i> 出貨管理<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-	                    <li><a href="<c:url value="/delivery"/>">出貨單列表</a></li>
-	                    <li><a href="<c:url value="/delivery/create"/>">新增出貨單</a></li>
+	                    <li><a href="<c:url value="/delivery"/>">出貨列表</a></li>
+	                    <li><a href="<c:url value="/delivery/create"/>">新增出貨</a></li>
 	                </ul>
 			</li>
 			<shiro:hasRole name="admin">
@@ -36,28 +39,3 @@
 	</div>
 
 </nav>
-<div id="header">
-	<div id="title">
-		<h1>
-			<a href="${ctx}">QuickStart示例</a><small>--TodoList应用演示</small>
-			<shiro:user>
-				<div class="btn-group pull-right">
-					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-						<i class="icon-user"></i> <shiro:principal property="name" /> <span
-						class="caret"></span>
-					</a>
-
-					<ul class="dropdown-menu">
-						<shiro:hasRole name="admin">
-							<li><a href="${ctx}/admin/user">Admin Users</a></li>
-							<li class="divider"></li>
-						</shiro:hasRole>
-						<li><a href="${ctx}/api">APIs</a></li>
-						<li><a href="${ctx}/profile">Edit Profile</a></li>
-						<li><a href="${ctx}/logout">Logout</a></li>
-					</ul>
-				</div>
-			</shiro:user>
-		</h1>
-	</div>
-</div>

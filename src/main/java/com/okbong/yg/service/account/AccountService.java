@@ -19,8 +19,8 @@ import org.springside.modules.utils.Clock;
 import org.springside.modules.utils.Encodes;
 
 import com.okbong.yg.entity.User;
-import com.okbong.yg.exception.ServiceException;
 import com.okbong.yg.repository.UserDao;
+import com.okbong.yg.service.ServiceException;
 import com.okbong.yg.service.account.ShiroDbRealm.ShiroUser;
 
 /**

@@ -7,9 +7,11 @@ package com.okbong.yg.entity;
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.NotBlank;
@@ -22,10 +24,11 @@ public class DeliveryDetail extends IdEntity {
 	private String name;
 	private int num;
 	private BigDecimal price;
-
-	@NotBlank
-	@ManyToOne
-	@JoinColumn(name = "delivery_id")
+	private String memo;
+	private Integer remove; // boolean flag
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "delivery_id", nullable = false)
 	public Delivery getDelivery() {
 		return delivery;
 	}
@@ -59,8 +62,26 @@ public class DeliveryDetail extends IdEntity {
 		this.price = price;
 	}
 
+	public String getMemo() {
+		return memo;
+	}
+
+	public void setMemo(String memo) {
+		this.memo = memo;
+	}
+
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
 	}
+
+	@Transient
+	public Integer getRemove() {
+		return remove;
+	}
+
+	public void setRemove(Integer remove) {
+		this.remove = remove;
+	}
+
 }

@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springside.modules.persistence.DynamicSpecifications;
 import org.springside.modules.persistence.SearchFilter;
 
+import com.okbong.yg.common.SearchFilterUtil;
 import com.okbong.yg.entity.Delivery;
 import com.okbong.yg.repository.DeliveryDao;
 
@@ -51,7 +52,7 @@ public class DeliveryService {
 	 * 創建動態查詢準則組合.
 	 */
 	private Specification<Delivery> buildSpecification(Map<String, Object> searchParams) {
-		Map<String, SearchFilter> filters = SearchFilter.parse(searchParams);
+		Map<String, SearchFilter> filters = SearchFilterUtil.parses(searchParams);
 		Specification<Delivery> spec = DynamicSpecifications.bySearchFilter(filters.values(), Delivery.class);
 		return spec;
 	}

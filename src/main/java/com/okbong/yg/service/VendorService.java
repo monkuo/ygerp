@@ -28,22 +28,22 @@ import com.okbong.yg.repository.VendorDao;
 @Transactional
 public class VendorService {
 
-	private VendorDao taskDao;
+	private VendorDao vendorDao;
 
 	public Vendor getVendor(Long id) {
-		return taskDao.findOne(id);
+		return vendorDao.findOne(id);
 	}
 
 	public void saveVendor(Vendor entity) {
-		taskDao.save(entity);
+		vendorDao.save(entity);
 	}
 
 	public void deleteVendor(Long id) {
-		taskDao.delete(id);
+		vendorDao.delete(id);
 	}
 
-	public List<Vendor> getAllVendor() {
-		return (List<Vendor>) taskDao.findAll();
+	public List<Vendor> findAllVendor() {
+		return (List<Vendor>) vendorDao.findAll();
 	}
 
 	public Page<Vendor> getUserVendor(Long userId, Map<String, Object> searchParams, int pageNumber, int pageSize,
@@ -51,7 +51,7 @@ public class VendorService {
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
 		Specification<Vendor> spec = buildSpecification(userId, searchParams);
 
-		return taskDao.findAll(spec, pageRequest);
+		return vendorDao.findAll(spec, pageRequest);
 	}
 
 	/**
@@ -79,7 +79,7 @@ public class VendorService {
 	}
 
 	@Autowired
-	public void setVendorDao(VendorDao taskDao) {
-		this.taskDao = taskDao;
+	public void setVendorDao(VendorDao vendorDao) {
+		this.vendorDao = vendorDao;
 	}
 }

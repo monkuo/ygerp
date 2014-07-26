@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>QuickStart示例:<sitemesh:title /></title>
+<title>::源吉科技::<sitemesh:title /></title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta http-equiv="Cache-Control" content="no-store" />
 <meta http-equiv="Pragma" content="no-cache" />
@@ -19,19 +19,8 @@
 <link href="<c:url value="/static/js/jquery-validation/1.11.1/validate.css"/>" type="text/css" rel="stylesheet" />
 <link href="<c:url value="/static/css/custom.css"/>" rel="stylesheet" />
 <link href="<c:url value="/static/js/dataTables/dataTables.bootstrap.css"/>" rel="stylesheet" />
-<link href='http://fonts.googleapis.com/css?family=Open+Sans rel='stylesheet' type='text/css' />
+<link href="<c:url value="/static/js/bootstrap-datepicker/datepicker3.css"/>" rel="stylesheet">
 
-</head>
-
-<body>
-    <div id="wrapper">
-        <%@ include file="/WEB-INF/layouts/header.jsp"%>
-        <div id="page-wrapper" >
-            <sitemesh:body />
-        </div>
-        <%@ include file="/WEB-INF/layouts/footer.jsp"%>
-    </div>
- 
 <script src="<c:url value="/static/js/jquery-1.10.2.js"/>"></script>
 <script src="<c:url value="/static/js/bootstrap.min.js"/>"></script>
 <script src="<c:url value="/static/js/jquery.metisMenu.js"/>"></script>
@@ -40,5 +29,20 @@
 <script src="<c:url value="/static/js/jquery-validation/1.11.1/messages_bs_zh.js"/>"></script>
 <script src="<c:url value="/static/js/dataTables/jquery.dataTables.js"/>"></script>
 <script src="<c:url value="/static/js/dataTables/dataTables.bootstrap.js"/>"></script>
+<script src="<c:url value="/static/js/bootstrap-datepicker/bootstrap-datepicker.js"/>"></script>
+<script src="<c:url value="/static/js/bootstrap-datepicker/bootstrap-datepicker.zh-TW.js"/>" charset="UTF-8"></script>
+<sitemesh:head/>
+</head>
+
+<body>
+
+    <div id="wrapper">
+        <%@ include file="/WEB-INF/layouts/header.jsp"%>
+        <div id="page-wrapper" >
+            <sitemesh:body />
+        </div>
+        <%@ include file="/WEB-INF/layouts/footer.jsp"%>
+    </div>
+ 
 </body>
 </html>

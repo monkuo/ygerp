@@ -8,10 +8,12 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.NotBlank;
@@ -28,7 +30,7 @@ public class Delivery extends IdEntity {
 	private Date createDate;
 	private User modifyUser;
 	private Date modifyDate;
-	private List<DeliveryDetail> details;
+	private List<DeliveryDetail> details ;
 	
 	@NotBlank
 	public String getDeliveryNo() {
@@ -38,7 +40,7 @@ public class Delivery extends IdEntity {
 	public void setDeliveryNo(String deliveryNo) {
 		this.deliveryNo = deliveryNo;
 	}
-	@NotBlank
+	@NotNull
 	public Date getDeliveryDate() {
 		return deliveryDate;
 	}
@@ -47,7 +49,7 @@ public class Delivery extends IdEntity {
 		this.deliveryDate = deliveryDate;
 	}
 	
-	@NotBlank
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "vendor_id")
 	public Vendor getVendor() {
@@ -58,7 +60,7 @@ public class Delivery extends IdEntity {
 		this.vendor = vendor;
 	}
 
-	@OneToMany(mappedBy="delivery")  
+	@OneToMany(mappedBy="delivery", fetch = FetchType.LAZY)  
 	public List<DeliveryDetail> getDetails() {
 		return details;
 	}
